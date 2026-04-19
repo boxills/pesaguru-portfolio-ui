@@ -1,0 +1,249 @@
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.page-header h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: #60a5fa;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.btn-link:hover { color: #93c5fd; }
+
+.error-msg {
+  color: #f87171;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+.required {
+  color: #f87171;
+}
+
+.success-msg {
+  color: #4ade80;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+/* Add form */
+.add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dropdowns {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 220px;
+}
+
+.field span {
+  font-size: 0.78rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.field select {
+  background: #1a1d27;
+  border: 1px solid #2d3148;
+  border-radius: 8px;
+  color: #e2e8f0;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.field select:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.asset-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #1e2130;
+}
+
+.selected-count {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.asset-list {
+  max-height: 420px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid #1e2130;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.asset-row {
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+
+.asset-row:hover { background: #1e2130; }
+
+.asset-symbol {
+  font-weight: 600;
+  font-size: 0.9rem;
+  min-width: 80px;
+}
+
+.asset-name {
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+.btn-primary {
+  align-self: flex-start;
+  background: #3b82f6;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px 24px;
+}
+
+.btn-primary:hover:not(:disabled) { background: #2563eb; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Active table */
+.asset-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.asset-table th {
+  text-align: left;
+  padding: 10px 12px;
+  color: #64748b;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid #1e2130;
+}
+
+.asset-table td {
+  padding: 12px 12px;
+  border-bottom: 1px solid #0f1117;
+  color: #e2e8f0;
+}
+
+.asset-table tr:hover td { background: #1a1d27; }
+
+.symbol-cell {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.btn-danger {
+  background: #dc262622;
+  border: 1px solid #dc262655;
+  border-radius: 6px;
+  color: #f87171;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 4px 12px;
+}
+
+.btn-danger:hover { background: #dc262633; }
+
+.btn-success {
+  background: #16a34a22;
+  border: 1px solid #16a34a55;
+  border-radius: 6px;
+  color: #4ade80;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 4px 12px;
+}
+
+.btn-success:hover { background: #16a34a33; }
+
+.btn-delete {
+  background: none;
+  border: none;
+  color: #475569;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  text-decoration: underline;
+}
+
+.btn-delete:hover { color: #f87171; }
+
+.actions-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge {
+  display: inline-block;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge.open   { background: #16a34a22; color: #4ade80; border: 1px solid #16a34a55; }
+.badge.closed { background: #1e293b;   color: #64748b; border: 1px solid #334155; }
+.badge.active   { background: #1d4ed822; color: #60a5fa; border: 1px solid #1d4ed855; }
+.badge.inactive { background: #dc262622; color: #f87171; border: 1px solid #dc262655; }
+
+.row-inactive td { opacity: 0.55; }
+
+.empty {
+  color: #475569;
+  text-align: center;
+  margin-top: 60px;
+  font-size: 0.95rem;
+}
