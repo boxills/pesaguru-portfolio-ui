@@ -1,8 +1,27 @@
 import { useEffect, useRef, useState } from 'react'
 import { Client } from '@stomp/stompjs'
 
+const STORAGE_KEY = 'pesaguru_portfolios'
+
+function loadFromStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    return raw ? JSON.parse(raw) : {}
+  } catch {
+    return {}
+  }
+}
+
+function saveToStorage(portfolios) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(portfolios))
+  } catch {
+    // storage full or unavailable — silent fail
+  }
+}
+
 export function usePortfolioSocket() {
-  const [portfolios, setPortfolios] = useState({}) // keyed by assetStatusId
+  const [portfolios, setPortfolios] = useState(loadFromStorage)
   const [connected, setConnected] = useState(false)
   const clientRef = useRef(null)
 
@@ -15,18 +34,9 @@ export function usePortfolioSocket() {
         client.subscribe('/topic/portfolio', (message) => {
           const data = JSON.parse(message.body)
           setPortfolios((prev) => {
-            const existing = prev[data.assetStatusId]
-            if (!data.openPosition && existing) {
-              return {
-                ...prev,
-                [data.assetStatusId]: {
-                  ...existing,
-                  currentPrice: data.currentPrice,
-                  timestamp: data.timestamp,
-                },
-              }
-            }
-            return { ...prev, [data.assetStatusId]: data }
+            const next = { ...prev, [data.assetStatusId]: data }
+            saveToStorage(next)
+            return next
           })
         })
       },

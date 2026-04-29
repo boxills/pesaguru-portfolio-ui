@@ -15,11 +15,21 @@ function gainClass(value) {
   return Number(value) >= 0 ? 'positive' : 'negative'
 }
 
-export default function PortfolioCard({ data }) {
+function fmtStrategy(strategy) {
+  if (!strategy) return null
+  return strategy.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+}
+
+export default function PortfolioCard({ data, accentColor }) {
   return (
-    <div className="card">
+    <div className="card" style={accentColor ? { backgroundColor: `${accentColor}12` } : undefined}>
       <div className="card-header">
-        <span className="symbol">{data.symbol ?? '—'}</span>
+        <div className="card-header-left">
+          <span className="symbol">{data.symbol ?? '—'}</span>
+          {fmtStrategy(data.strategy) && (
+            <span className="strategy-label">{fmtStrategy(data.strategy)}</span>
+          )}
+        </div>
         <span className={`badge ${data.openPosition ? 'open' : 'closed'}`}>
           {data.openPosition ? 'Open' : 'Closed'}
         </span>

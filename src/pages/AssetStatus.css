@@ -247,3 +247,62 @@
   margin-top: 60px;
   font-size: 0.95rem;
 }
+
+/* Wide page variant */
+.page-wide {
+  max-width: 1200px;
+}
+
+/* Date input */
+.field input[type="date"] {
+  background: #1a1d27;
+  border: 1px solid #2d3148;
+  border-radius: 8px;
+  color: #e2e8f0;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color-scheme: dark;
+}
+
+.field input[type="date"]:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+/* Trade table */
+.trade-table .date-cell {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.change-pos { color: #4ade80; }
+.change-neg { color: #f87171; }
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+
+.pagination span {
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+.btn-page {
+  background: #1a1d27;
+  border: 1px solid #2d3148;
+  border-radius: 6px;
+  color: #e2e8f0;
+  cursor: pointer;
+  font-size: 0.82rem;
+  padding: 4px 14px;
+}
+
+.btn-page:hover:not(:disabled) { background: #1e2130; }
+.btn-page:disabled { opacity: 0.35; cursor: not-allowed; }
