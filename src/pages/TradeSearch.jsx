@@ -109,10 +109,44 @@ export default function TradeSearch() {
           </label>
         </div>
 
-        <button type="submit" className="btn-primary" disabled={!canSearch}>
+        <button type="submit" className="btn-primary" style={{ marginBottom: '1.5rem' }} disabled={!canSearch}>
           {loading ? 'Searching...' : 'Search'}
         </button>
       </form>
+
+      {results && results.firstTrade && results.lastTrade && (() => {
+        const first = results.firstTrade
+        const last = results.lastTrade
+        const amountChange = (last.totalValue ?? 0) - (first.totalValue ?? 0)
+        const pctChange = first.totalValue ? (amountChange / first.totalValue) * 100 : 0
+        const changeClass = amountChange > 0 ? 'change-pos' : amountChange < 0 ? 'change-neg' : ''
+        return (
+          <div className="trade-summary">
+            <div className="summary-card">
+              <span className="summary-label">First Trade</span>
+              <span className="summary-value">{fmtDate(first.createDate)}</span>
+              <span className="summary-sub">{first.direction} · {fmt(first.totalValue)}</span>
+            </div>
+            <div className="summary-card">
+              <span className="summary-label">Last Trade</span>
+              <span className="summary-value">{fmtDate(last.createDate)}</span>
+              <span className="summary-sub">{last.direction} · {fmt(last.totalValue)}</span>
+            </div>
+            <div className="summary-card">
+              <span className="summary-label">Amount Change</span>
+              <span className={`summary-value ${changeClass}`}>
+                {amountChange > 0 ? '+' : ''}{fmt(amountChange)}
+              </span>
+            </div>
+            <div className="summary-card">
+              <span className="summary-label">% Change</span>
+              <span className={`summary-value ${changeClass}`}>
+                {pctChange > 0 ? '+' : ''}{pctChange.toFixed(2)}%
+              </span>
+            </div>
+          </div>
+        )
+      })()}
 
       {results && (
         <>
@@ -130,7 +164,7 @@ export default function TradeSearch() {
                     <th>Strategy</th>
                     <th>Price</th>
                     <th>Qty</th>
-                    <th>Net Value</th>
+                    <th>Total Value</th>
                     <th>Change</th>
                     <th>Timeframe</th>
                   </tr>
@@ -149,7 +183,7 @@ export default function TradeSearch() {
                       <td>{t.strategy?.replace(/_/g, ' ')}</td>
                       <td>{fmt(t.price)}</td>
                       <td>{t.quantity != null ? t.quantity : '—'}</td>
-                      <td>{fmt(t.netValue)}</td>
+                      <td>{fmt(t.totalValue)}</td>
                       <td className={t.changeValue > 0 ? 'change-pos' : t.changeValue < 0 ? 'change-neg' : ''}>
                         {t.changeValue != null ? (t.changeValue > 0 ? '+' : '') + fmt(t.changeValue) : '—'}
                       </td>
