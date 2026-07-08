@@ -51,28 +51,6 @@ export default function PortfolioCard({ data, accentColor }) {
         />
       </div>
 
-      {data.openPosition && (
-        <div className="signals">
-          <div className="signals-title">Keltner Signals</div>
-          <div className="signals-grid">
-            <div className="signals-col">
-              <div className="signals-col-label">↑ Upper Band</div>
-              <Signal label="50 EMA (now)"  active={data.touchedUpperAndCrossedBelow50Ema}          variant="bear" />
-              <Signal label="Mid (now)"     active={data.touchedUpperAndCrossedBelowMiddleKeltner}   variant="bear" />
-              <Signal label="50 EMA (ever)" active={data.everTouchedUpperAndCrossedBelow50Ema}       variant="bear-ever" />
-              <Signal label="Mid (ever)"    active={data.everTouchedUpperAndCrossedBelowMiddleKeltner} variant="bear-ever" />
-            </div>
-            <div className="signals-col">
-              <div className="signals-col-label">↓ Lower Band</div>
-              <Signal label="50 EMA (now)"  active={data.touchedLowerAndCrossedAbove50Ema}          variant="bull" />
-              <Signal label="Mid (now)"     active={data.touchedLowerAndCrossedAboveMiddleKeltner}   variant="bull" />
-              <Signal label="50 EMA (ever)" active={data.everTouchedLowerAndCrossedAbove50Ema}       variant="bull-ever" />
-              <Signal label="Mid (ever)"    active={data.everTouchedLowerAndCrossedAboveMiddleKeltner} variant="bull-ever" />
-            </div>
-          </div>
-        </div>
-      )}
-
       <div className="card-footer">
         <span>{data.timestamp ? new Date(data.timestamp).toLocaleTimeString() : ''}</span>
         {data.openPosition && (
@@ -84,15 +62,6 @@ export default function PortfolioCard({ data, accentColor }) {
           </a>
         )}
       </div>
-    </div>
-  )
-}
-
-function Signal({ label, active, variant }) {
-  return (
-    <div className={`signal ${active ? `signal-${variant}` : 'signal-off'}`}>
-      <span className="signal-dot">{active ? '●' : '○'}</span>
-      {label}
     </div>
   )
 }

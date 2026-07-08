@@ -5,6 +5,7 @@ import PortfolioCard from './components/PortfolioCard'
 import AddAssetStatus from './pages/AddAssetStatus'
 import ActiveAssets from './pages/ActiveAssets'
 import TradeSearch from './pages/TradeSearch'
+import EmaTab from './pages/EmaTab'
 
 const STRATEGY_COLORS = [
   '#3b82f6', // blue
@@ -84,6 +85,9 @@ export default function App() {
           <NavLink to="/trades" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
             Trades
           </NavLink>
+          <NavLink to="/ema" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+            EMA
+          </NavLink>
         </nav>
         <span className={`connection-dot ${connected ? 'connected' : 'disconnected'}`}>
           {connected ? 'Live' : 'Connecting...'}
@@ -95,6 +99,7 @@ export default function App() {
         <Route path="/add" element={<AddAssetStatus />} />
         <Route path="/active" element={<ActiveAssets />} />
         <Route path="/trades" element={<TradeSearch />} />
+        <Route path="/ema" element={<EmaTab />} />
       </Routes>
     </div>
   )

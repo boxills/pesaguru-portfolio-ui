@@ -8,6 +8,11 @@ function fmt(val) {
   return Number(val).toFixed(2)
 }
 
+function fmt6(val) {
+  if (val == null) return '—'
+  return Number(val).toFixed(6)
+}
+
 function fmtDate(str) {
   if (!str) return '—'
   return str.replace('T', ' ').substring(0, 16)
@@ -181,11 +186,11 @@ export default function TradeSearch() {
                       </td>
                       <td>{t.position ?? '—'}</td>
                       <td>{t.strategy?.replace(/_/g, ' ')}</td>
-                      <td>{fmt(t.price)}</td>
+                      <td>{fmt6(t.price)}</td>
                       <td>{t.quantity != null ? t.quantity : '—'}</td>
                       <td>{fmt(t.totalValue)}</td>
                       <td className={t.changeValue > 0 ? 'change-pos' : t.changeValue < 0 ? 'change-neg' : ''}>
-                        {t.changeValue != null ? (t.changeValue > 0 ? '+' : '') + fmt(t.changeValue) : '—'}
+                        {t.changeValue != null ? (t.changeValue > 0 ? '+' : '') + fmt6(t.changeValue) : '—'}
                       </td>
                       <td>{t.timeFrame?.replace(/_/g, ' ') ?? '—'}</td>
                     </tr>
