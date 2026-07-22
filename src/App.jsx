@@ -43,7 +43,7 @@ function groupByStrategy(entries) {
 }
 
 function Portfolio() {
-  const { portfolios } = usePortfolioSocket()
+  const { portfolios, removePortfolio } = usePortfolioSocket()
   const entries = Object.values(portfolios)
 
   if (entries.length === 0) {
@@ -58,7 +58,12 @@ function Portfolio() {
         {Object.entries(groups).map(([strategy, items]) => {
           const color = strategyColor(strategy)
           return items.map((data) => (
-            <PortfolioCard key={data.assetStatusId} data={data} accentColor={color} />
+            <PortfolioCard
+              key={data.assetStatusId}
+              data={data}
+              accentColor={color}
+              onHide={() => removePortfolio(data.assetStatusId)}
+            />
           ))
         })}
       </div>

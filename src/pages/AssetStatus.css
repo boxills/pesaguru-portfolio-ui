@@ -206,6 +206,21 @@
 
 .btn-success:hover { background: #16a34a33; }
 
+.btn-sell {
+  background: #dc262622;
+  border: 1px solid #dc262655;
+  border-radius: 6px;
+  color: #f87171;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.btn-sell:hover { background: #dc262644; color: #fca5a5; }
+
 .btn-delete {
   background: none;
   border: none;

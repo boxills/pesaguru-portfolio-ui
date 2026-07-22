@@ -49,5 +49,14 @@ export function usePortfolioSocket() {
     return () => client.deactivate()
   }, [])
 
-  return { portfolios, connected }
+  function removePortfolio(assetStatusId) {
+    setPortfolios((prev) => {
+      const next = { ...prev }
+      delete next[assetStatusId]
+      saveToStorage(next)
+      return next
+    })
+  }
+
+  return { portfolios, connected, removePortfolio }
 }

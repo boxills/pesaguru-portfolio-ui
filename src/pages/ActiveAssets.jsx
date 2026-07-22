@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getAllAssetStatuses, activateAssetStatus, deactivateAssetStatus, deleteAssetStatus } from '../api/assetStatus'
+import { sellInverse } from '../api/trade'
 import './AssetStatus.css'
 
 export default function ActiveAssets() {
@@ -39,6 +40,18 @@ export default function ActiveAssets() {
     if (!confirm('Delete this asset status? This cannot be undone.')) return
     await deleteAssetStatus(id)
     setItems((prev) => prev.filter((item) => item.id !== id))
+  }
+
+  async function handleSell(id, symbol) {
+    if (!confirm(`Sell ${symbol ?? 'this asset'}? This will execute the trade immediately.`)) return
+    try {
+      await sellInverse(id)
+      setItems((prev) =>
+        prev.map((item) => (item.id === id ? { ...item, openPosition: false } : item))
+      )
+    } catch {
+      setError('Failed to sell')
+    }
   }
 
   return (
@@ -83,6 +96,14 @@ export default function ActiveAssets() {
                   </span>
                 </td>
                 <td className="actions-cell">
+                  {item.openPosition && (
+                    <button
+                      className="btn-sell"
+                      onClick={() => handleSell(item.id, item.symbol)}
+                    >
+                      Sell
+                    </button>
+                  )}
                   {item.active ? (
                     <button
                       className="btn-danger"

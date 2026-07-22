@@ -1,4 +1,5 @@
 .card {
+  position: relative;
   background: #1a1d27;
   border: 1px solid #2d3148;
   border-radius: 12px;
@@ -6,6 +7,29 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.hide-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #64748b;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.hide-btn:hover {
+  background: #2d314880;
+  color: #e2e8f0;
 }
 
 .card-header {
@@ -159,6 +183,7 @@
 }
 
 .sell-link {
+  font-family: inherit;
   font-size: 0.75rem;
   font-weight: 600;
   color: #f87171;
@@ -169,9 +194,15 @@
   background: #dc262622;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
-.sell-link:hover {
+.sell-link:hover:not(:disabled) {
   background: #dc262644;
   color: #fca5a5;
+}
+
+.sell-link:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

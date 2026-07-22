@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { sellInverse } from '../api/trade'
 import './PortfolioCard.css'
 
 function fmt(value, decimals = 2) {
@@ -20,9 +22,36 @@ function fmtStrategy(strategy) {
   return strategy.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
 }
 
-export default function PortfolioCard({ data, accentColor }) {
+export default function PortfolioCard({ data, accentColor, onHide }) {
+  const [selling, setSelling] = useState(false)
+  const [sellError, setSellError] = useState(null)
+
+  async function handleSell() {
+    if (!confirm(`Sell ${data.symbol ?? 'this asset'}? This will execute the trade immediately.`)) return
+    setSelling(true)
+    setSellError(null)
+    try {
+      await sellInverse(data.assetStatusId)
+    } catch {
+      setSellError('Sell failed')
+    } finally {
+      setSelling(false)
+    }
+  }
+
   return (
     <div className="card" style={accentColor ? { backgroundColor: `${accentColor}12` } : undefined}>
+      {onHide && (
+        <button
+          type="button"
+          className="hide-btn"
+          onClick={onHide}
+          aria-label="Hide card"
+          title="Hide until new data arrives"
+        >
+          ×
+        </button>
+      )}
       <div className="card-header">
         <div className="card-header-left">
           <span className="symbol">{data.symbol ?? '—'}</span>
@@ -52,14 +81,18 @@ export default function PortfolioCard({ data, accentColor }) {
       </div>
 
       <div className="card-footer">
-        <span>{data.timestamp ? new Date(data.timestamp).toLocaleTimeString() : ''}</span>
+        <span>
+          {sellError ?? (data.timestamp ? new Date(data.timestamp).toLocaleTimeString() : '')}
+        </span>
         {data.openPosition && (
-          <a
+          <button
+            type="button"
             className="sell-link"
-            href={`/api/trade/sell-inverse?assetStatusId=${data.assetStatusId}`}
+            onClick={handleSell}
+            disabled={selling}
           >
-            Sell
-          </a>
+            {selling ? 'Selling…' : 'Sell'}
+          </button>
         )}
       </div>
     </div>

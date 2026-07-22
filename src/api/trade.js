@@ -9,3 +9,5 @@ async function get(path) {
 
 export const searchTrades = (assetStatusId, from, to, page = 0, size = 20) =>
   get(`/search?assetStatusId=${assetStatusId}&from=${from}&to=${to}&page=${page}&size=${size}`)
+
+export const sellInverse = (assetStatusId) => get(`/sell-inverse?assetStatusId=${assetStatusId}`)
