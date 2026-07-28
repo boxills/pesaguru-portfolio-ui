@@ -73,7 +73,7 @@ export default function ActiveAssets() {
             <tr>
               <th>Symbol</th>
               <th>Source</th>
-              <th>Strategy</th>
+              <th className="strategy-cell">Strategy</th>
               <th>Open Position</th>
               <th>Status</th>
               <th></th>
@@ -84,7 +84,7 @@ export default function ActiveAssets() {
               <tr key={item.id} className={item.active ? '' : 'row-inactive'}>
                 <td className="symbol-cell">{item.symbol}</td>
                 <td>{item.source}</td>
-                <td>{item.strategy?.replace(/_/g, ' ')}</td>
+                <td className="strategy-cell">{item.strategy?.replace(/_/g, ' ')}</td>
                 <td>
                   <span className={`badge ${item.openPosition ? 'open' : 'closed'}`}>
                     {item.openPosition ? 'Open' : 'Closed'}
@@ -96,14 +96,13 @@ export default function ActiveAssets() {
                   </span>
                 </td>
                 <td className="actions-cell">
-                  {item.openPosition && (
-                    <button
-                      className="btn-sell"
-                      onClick={() => handleSell(item.id, item.symbol)}
-                    >
-                      Sell
-                    </button>
-                  )}
+                  <button
+                    className="btn-sell"
+                    onClick={() => handleSell(item.id, item.symbol)}
+                    disabled={!item.openPosition}
+                  >
+                    Sell
+                  </button>
                   {item.active ? (
                     <button
                       className="btn-danger"

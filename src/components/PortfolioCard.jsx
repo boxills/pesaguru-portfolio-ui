@@ -84,16 +84,14 @@ export default function PortfolioCard({ data, accentColor, onHide }) {
         <span>
           {sellError ?? (data.timestamp ? new Date(data.timestamp).toLocaleTimeString() : '')}
         </span>
-        {data.openPosition && (
-          <button
-            type="button"
-            className="sell-link"
-            onClick={handleSell}
-            disabled={selling}
-          >
-            {selling ? 'Selling…' : 'Sell'}
-          </button>
-        )}
+        <button
+          type="button"
+          className="sell-link"
+          onClick={handleSell}
+          disabled={selling || !data.openPosition}
+        >
+          {selling ? 'Selling…' : 'Sell'}
+        </button>
       </div>
     </div>
   )

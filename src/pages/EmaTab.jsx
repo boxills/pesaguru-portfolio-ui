@@ -14,6 +14,13 @@ function priceVsEma(price, ema) {
   return Number(price) > Number(ema) ? 'change-pos' : 'change-neg'
 }
 
+function DirectionArrow({ direction }) {
+  if (direction === 'UP') return <span className="change-pos"> ▲</span>
+  if (direction === 'DOWN') return <span className="change-neg"> ▼</span>
+  if (direction === 'FLAT') return <span className="ema-flat"> —</span>
+  return null
+}
+
 export default function EmaTab() {
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
@@ -72,10 +79,18 @@ export default function EmaTab() {
                 <td className="symbol-cell">{item.symbol}</td>
                 <td>{item.timeFrame ?? '—'}</td>
                 <td className="stat-value">${fmt(item.currentPrice)}</td>
-                <td className={priceVsEma(item.currentPrice, item.ema8)}>${fmt(item.ema8)}</td>
-                <td className={priceVsEma(item.currentPrice, item.ema12)}>${fmt(item.ema12)}</td>
-                <td className={priceVsEma(item.currentPrice, item.ema50)}>${fmt(item.ema50)}</td>
-                <td className={priceVsEma(item.currentPrice, item.ema200)}>${fmt(item.ema200)}</td>
+                <td className={priceVsEma(item.currentPrice, item.ema8)}>
+                  ${fmt(item.ema8)}<DirectionArrow direction={item.ema8Direction} />
+                </td>
+                <td className={priceVsEma(item.currentPrice, item.ema12)}>
+                  ${fmt(item.ema12)}<DirectionArrow direction={item.ema12Direction} />
+                </td>
+                <td className={priceVsEma(item.currentPrice, item.ema50)}>
+                  ${fmt(item.ema50)}<DirectionArrow direction={item.ema50Direction} />
+                </td>
+                <td className={priceVsEma(item.currentPrice, item.ema200)}>
+                  ${fmt(item.ema200)}<DirectionArrow direction={item.ema200Direction} />
+                </td>
               </tr>
             ))}
           </tbody>

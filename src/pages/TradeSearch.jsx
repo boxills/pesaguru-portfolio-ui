@@ -166,7 +166,7 @@ export default function TradeSearch() {
                     <th>Symbol</th>
                     <th>Direction</th>
                     <th>Position</th>
-                    <th>Strategy</th>
+                    <th>Transaction Type</th>
                     <th>Price</th>
                     <th>Qty</th>
                     <th>Total Value</th>
@@ -185,7 +185,7 @@ export default function TradeSearch() {
                         </span>
                       </td>
                       <td>{t.position ?? '—'}</td>
-                      <td>{t.strategy?.replace(/_/g, ' ')}</td>
+                      <td>{t.transactionType?.replace(/_/g, ' ') ?? '—'}</td>
                       <td>{fmt6(t.price)}</td>
                       <td>{t.quantity != null ? t.quantity : '—'}</td>
                       <td>{fmt(t.totalValue)}</td>
