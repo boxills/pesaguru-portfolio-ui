@@ -15,7 +15,7 @@ function fmt6(val) {
 
 function fmtDate(str) {
   if (!str) return '—'
-  return str.replace('T', ' ').substring(0, 16)
+  return str.replace('T', ' ').substring(0, 19)
 }
 
 export default function TradeSearch() {
